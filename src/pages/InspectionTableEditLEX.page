@@ -1,0 +1,71 @@
+<apex:page standardController="Inspection__c" extensions="InspectionExtension" sidebar="false" docType="html-5.0" lightningStylesheets="true">
+    <apex:form >
+        
+        <script>
+        beenFocused = true;
+        </script>
+        
+        <apex:sectionHeader title="点検表" subtitle="{!ip.RecordType.Name}"/>
+        
+        <apex:pageBlock mode="detail">
+            <apex:pageBlock mode="maindetail">
+                    <apex:outputPanel >
+                        <apex:commandButton value="<" rendered="{!renderMoveButton}" action="{!getPreviousInspection}"/>
+                        <apex:outputText value="{!pageInformation}"/>
+                        <apex:commandButton value=">" rendered="{!renderMoveButton}" action="{!getNextInspection}"/>
+                        <apex:commandButton value="終了" rendered="{!renderCancelButton}" action="{!cancel}"/>
+                        <apex:commandButton value="出力" action="{!confirmationCreateInspectionPDF}" reRender="messages"/>
+                        <apex:commandButton value="連絡" action="{!confirmationPhoneReportInspection}" reRender="messages"/>
+                        <apex:commandButton value="承認" action="{!confirmationApprovalInspection}" reRender="messages"/>
+                    </apex:outputPanel>
+                    <apex:outputPanel id="messages">
+                        <apex:outputText value="{!Message}" style="color: #FF0000"/>
+                        <apex:commandButton value="キャンセル" rendered="{!OR(renderApprovalButton,renderPDFButton,renderPhoneReportButton)}" action="{!confirmationCancel}" reRender="messages"/>
+                        <apex:commandButton value="PDF作成" rendered="{!renderPDFButton}" action="{!createInspectionPDF}" reRender="messages"/>
+                        <apex:commandButton value="依頼実行" rendered="{!renderPhoneReportButton}" action="{!phoneReportInspection}" reRender="messages"/>
+                        <apex:selectList rendered="{!renderPhoneReportButton}" value="{!selectionUser}" size="0" >
+                            <apex:selectOptions value="{!selectUserList}"/>
+                        </apex:selectList>
+                        <apex:commandButton value="承認申請" rendered="{!renderApprovalButton}" action="{!approvalInspection}" reRender="messages"/>
+                    </apex:outputPanel>
+            </apex:pageBlock>
+            <apex:pageBlock mode="maindetail">
+                <apex:pageBlockSection >
+                    <apex:outputField value="{!ip.AccountName__c}"/>
+                    <apex:outputField value="{!ip.InspectionDateTime__c}"/>
+                    <apex:outputField value="{!ip.Manufacturer__c}"/>
+                    <apex:outputField value="{!ip.EquipmentNumber__c}"/>
+                    <apex:outputField value="{!ip.ModelName__c}"/>
+                    <apex:outputField value="{!ip.Name}"/>
+                </apex:pageBlockSection>
+            </apex:pageBlock>
+            <apex:outputPanel >
+                <apex:actionSupport event="onchange" action="{!saveInspection}" reRender="messages"/>
+                <apex:pageBlock mode="maindetail">
+                    <apex:pageBlockSection rendered="{!renderA}">
+                        <apex:inputField value="{!ip.InspectionRresultA__c}"/>
+                        <apex:inputField value="{!ip.InspectionNoticesA__c}"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection rendered="{!renderB}">
+                        <apex:inputField value="{!ip.InspectionRresultB__c}"/>
+                        <apex:inputField value="{!ip.InspectionNoticesB__c}"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection rendered="{!renderC}">
+                        <apex:inputField value="{!ip.InspectionRresultC__c}"/>
+                        <apex:inputField value="{!ip.InspectionNoticesC__c}"/>
+                    </apex:pageBlockSection>
+                    <apex:pageBlockSection rendered="{!renderD}">
+                        <apex:inputField value="{!ip.InspectionRresultD__c}"/>
+                        <apex:inputField value="{!ip.InspectionNoticesD__c}"/>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+                <apex:pageBlock mode="maindetail">
+                    <apex:pageBlockSection columns="1">
+                        <apex:inputField value="{!ip.Remarks__c}" style="width: 79%;"/>
+                    </apex:pageBlockSection>
+                </apex:pageBlock>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        
+    </apex:form>
+</apex:page>

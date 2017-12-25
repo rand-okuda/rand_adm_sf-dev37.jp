@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>点検予実</value>
+    </caseValues>
+    <fields>
+        <label><!-- 取引先名 --></label>
+        <name>AccountName__c</name>
+    </fields>
+    <fields>
+        <label><!-- ￥￥_通知フィード --></label>
+        <name>AlertFeed__c</name>
+    </fields>
+    <fields>
+        <label><!-- カレンダー表示 --></label>
+        <name>CalendarDisplay__c</name>
+    </fields>
+    <fields>
+        <label><!-- ￥￥_点検間隔日数 --></label>
+        <name>CheckSpan__c</name>
+    </fields>
+    <fields>
+        <label><!-- ￥￥_点検完了 --></label>
+        <name>Completion__c</name>
+    </fields>
+    <fields>
+        <label><!-- ￥￥_施設レコードId --></label>
+        <name>EquipmentId__c</name>
+    </fields>
+    <fields>
+        <label><!-- 施設番号 --></label>
+        <name>EquipmentNumber__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検施設 --></label>
+        <name>Equipment__c</name>
+        <relationshipLabel><!-- 点検予実 --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- 点検完了 --></label>
+        <name>InspectionCompleted__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検日時 --></label>
+        <name>InspectionDateTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- 特記事項A --></label>
+        <name>InspectionNoticesA__c</name>
+    </fields>
+    <fields>
+        <label><!-- 特記事項B --></label>
+        <name>InspectionNoticesB__c</name>
+    </fields>
+    <fields>
+        <label><!-- 特記事項C --></label>
+        <name>InspectionNoticesC__c</name>
+    </fields>
+    <fields>
+        <label><!-- 特記事項D --></label>
+        <name>InspectionNoticesD__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検A --></label>
+        <name>InspectionRresultA__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検B --></label>
+        <name>InspectionRresultB__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検C --></label>
+        <name>InspectionRresultC__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検D --></label>
+        <name>InspectionRresultD__c</name>
+    </fields>
+    <fields>
+        <label><!-- 前回点検日時 --></label>
+        <name>LastInspectionDateTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- 前回点検 --></label>
+        <name>LastInspection__c</name>
+        <relationshipLabel><!-- 次回点検 --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- 前回点検者 --></label>
+        <name>LastWorker__c</name>
+    </fields>
+    <fields>
+        <label><!-- 開発会社 --></label>
+        <name>Manufacturer__c</name>
+    </fields>
+    <fields>
+        <label><!-- 施設種別 --></label>
+        <name>ModelName__c</name>
+    </fields>
+    <fields>
+        <label><!-- 電話報告有 --></label>
+        <name>PhoneReport__c</name>
+        <relationshipLabel><!-- 点検予実 (電話報告有) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- 備考 --></label>
+        <name>Remarks__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検表PDF出力 --></label>
+        <name>TablePDFOutput__c</name>
+    </fields>
+    <fields>
+        <label><!-- ￥￥_本日点検対象 --></label>
+        <name>TodayTarget__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検者名 --></label>
+        <name>WorkerName__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検者 --></label>
+        <name>Worker__c</name>
+        <relationshipLabel><!-- 点検予実 (点検者) --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>点検レイアウト</layout>
+        <sections>
+            <label><!-- カスタムリンク --></label>
+            <section>カスタムリンク</section>
+        </sections>
+        <sections>
+            <label><!-- 備考情報 --></label>
+            <section>備考情報</section>
+        </sections>
+        <sections>
+            <label><!-- 追加情報 --></label>
+            <section>追加情報</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>点検レイアウト_エアー</layout>
+        <sections>
+            <label><!-- カスタムリンク --></label>
+            <section>カスタムリンク</section>
+        </sections>
+        <sections>
+            <label><!-- 備考情報 --></label>
+            <section>備考情報</section>
+        </sections>
+        <sections>
+            <label><!-- 追加情報 --></label>
+            <section>追加情報</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>点検レイアウト_コージェネ</layout>
+        <sections>
+            <label><!-- カスタムリンク --></label>
+            <section>カスタムリンク</section>
+        </sections>
+        <sections>
+            <label><!-- 備考情報 --></label>
+            <section>備考情報</section>
+        </sections>
+        <sections>
+            <label><!-- 追加情報 --></label>
+            <section>追加情報</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>点検レイアウト_太陽光</layout>
+        <sections>
+            <label><!-- カスタムリンク --></label>
+            <section>カスタムリンク</section>
+        </sections>
+        <sections>
+            <label><!-- 備考情報 --></label>
+            <section>備考情報</section>
+        </sections>
+        <sections>
+            <label><!-- 追加情報 --></label>
+            <section>追加情報</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>点検レイアウト_蓄電</layout>
+        <sections>
+            <label><!-- カスタムリンク --></label>
+            <section>カスタムリンク</section>
+        </sections>
+        <sections>
+            <label><!-- 備考情報 --></label>
+            <section>備考情報</section>
+        </sections>
+        <sections>
+            <label><!-- 追加情報 --></label>
+            <section>追加情報</section>
+        </sections>
+    </layouts>
+    <quickActions>
+        <label><!-- 日程担当編集 --></label>
+        <name>Edit</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- 電話報告 --></label>
+        <name>PhoneReport</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- 点検表PDF --></label>
+        <name>TablePDFOutput</name>
+    </quickActions>
+    <quickActions>
+        <label><!-- 電話報告ToDo --></label>
+        <name>TelephoneReportToDo</name>
+    </quickActions>
+    <recordTypes>
+        <label><!-- エアー --></label>
+        <name>Air</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- コージェネ --></label>
+        <name>Cogener</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- マスター --></label>
+        <name>Master</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- 太陽光 --></label>
+        <name>Solar</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- 蓄電 --></label>
+        <name>Storage</name>
+    </recordTypes>
+    <validationRules>
+        <errorMessage><!-- 点検結果「正常」以外は特記事項を必ず記入してください。 --></errorMessage>
+        <name>RemarksRequired</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- InspectionTable --></label>
+        <name>InspectionTable</name>
+    </webLinks>
+</CustomObjectTranslation>

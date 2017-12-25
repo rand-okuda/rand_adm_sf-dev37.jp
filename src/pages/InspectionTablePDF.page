@@ -1,0 +1,335 @@
+<apex:page standardController="Inspection__c" extensions="InspectionExtension" renderAs="Advanced_pdf" showHeader="false" applyHtmlTag="false" action="{!initPDF}">
+    
+    <html>
+        
+        <head>
+            <style>
+                @page {
+                size: 8.27in 11.69in;   /* A4 縦サイズ */
+                margin: 30px 30px 30px 30px; 
+                }
+                body {
+                font-family: Arial Unicode MS;
+                }
+                html{
+                color:#000;background:#FFF;
+                }
+                table{
+                border-collapse:collapse;border-spacing:0;
+                }
+            </style>
+        </head>
+        
+        <body>
+            
+            <table style="width: 85%;">
+                <tbody>
+                    <tr>
+                        <td style="width: 15%;">
+                            <apex:image url="{!URLFOR($Action.Attachment.Download, imageAtt.id)}" rendered="{!renderQR}"/>
+                        </td>
+                        <td style="width: 85%;">
+                            <h2 style="text-align: center;">点検表</h2>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <table style="width: 100%;" border="1">
+                <tbody>
+                    <tr>
+                        <td style="width: 12%;">{!$ObjectType.Inspection__c.Fields.AccountName__c.Label}</td>
+                        <td style="width: 38%;">{!ip.AccountName__c}</td>
+                        <td style="width: 12%;">{!$ObjectType.Inspection__c.Fields.InspectionDateTime__c.Label}</td>
+                        <td style="width: 38%;">{!InspectionDateTime}</td>
+                    </tr>
+                    <tr>
+                        <td>{!$ObjectType.Inspection__c.Fields.ModelName__c.Label}</td>
+                        <td>{!ip.Manufacturer__c} {!ip.ModelName__c}</td>
+                        <td>{!$ObjectType.Inspection__c.Fields.EquipmentNumber__c.Label}</td>
+                        <td>{!ip.EquipmentNumber__c} {!ip.Name}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>&nbsp;</p>
+            <table style="width: 100%;" border="1">
+                <tbody>
+                    <tr>
+                        <td style="width: 30%;">点検内容</td>
+                        <td style="width: 20%;">点検結果</td>
+                        <td style="width: 50%;">特記事項</td>
+                    </tr>
+                </tbody>
+            </table>
+            <apex:pageBlock rendered="{!renderA}">
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%;">{!$ObjectType.Inspection__c.Fields.InspectionRresultA__c.Label}</td>
+                            <td style="width: 20%;">{!ipPdf.InspectionRresultA__c}</td>
+                            <td style="width: 50%;">{!ip.InspectionNoticesA__c}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+            <apex:pageBlock rendered="{!renderB}">
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%;">{!$ObjectType.Inspection__c.Fields.InspectionRresultB__c.Label}</td>
+                            <td style="width: 20%;">{!ipPdf.InspectionRresultB__c}</td>
+                            <td style="width: 50%;">{!ip.InspectionNoticesB__c}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+            <apex:pageBlock rendered="{!renderC}">
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%;">{!$ObjectType.Inspection__c.Fields.InspectionRresultC__c.Label}</td>
+                            <td style="width: 20%;">{!ipPdf.InspectionRresultC__c}</td>
+                            <td style="width: 50%;">{!ip.InspectionNoticesC__c}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+            <apex:pageBlock rendered="{!renderD}">
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%;">{!$ObjectType.Inspection__c.Fields.InspectionRresultD__c.Label}</td>
+                            <td style="width: 20%;">{!ipPdf.InspectionRresultD__c}</td>
+                            <td style="width: 50%;">{!ip.InspectionNoticesD__c}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+            <apex:pageBlock >
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;" border="1">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; height: 20px;"></td>
+                            <td style="width: 20%; height: 20px;"></td>
+                            <td style="width: 50%; height: 20px;"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+            <p>&nbsp;</p>
+            <table style="table-layout:fixed; width:100%;" border="1">
+                <tbody>
+                    <tr>
+                        <td>{!$ObjectType.Inspection__c.Fields.Remarks__c.Label}</td>
+                    </tr>
+                    <tr>
+                        <td style="word-wrap :break-word" height="65px">{!ip.Remarks__c}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p>&nbsp;</p>
+            <table style="width: 100%;" border="1">
+                <tbody>
+                    <tr>
+                        <td style="width: 20%;">&nbsp;</td>
+                        <td style="width: 40%;">署名欄</td>
+                        <td style="width: 40%;">押印欄</td>
+                    </tr>
+                    <tr>
+                        <td>{!$ObjectType.Inspection__c.Fields.WorkerName__c.Label}</td>
+                        <td>{!ip.WorkerName__c}</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>確認者名</td>
+                        <td>&nbsp;</td>
+                        <td>&nbsp;</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </body>
+        
+    </html>
+    
+</apex:page>

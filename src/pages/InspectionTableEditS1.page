@@ -1,0 +1,135 @@
+<apex:page standardController="Inspection__c" extensions="InspectionExtension" sidebar="false" docType="html-5.0" lightningStylesheets="false">
+    
+    <html>
+        <head>
+            <style>
+                @page {
+                }
+                html{
+                }
+                table{
+                border-collapse:collapse;border-spacing:0;
+                }
+            </style>
+        </head>
+        <body>
+            <apex:form >
+                
+                <script>
+                beenFocused = true;
+                </script>
+                
+                <table style="width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td style="width: 30%; text-align: left;">
+                                <apex:commandButton value="出力" action="{!confirmationCreateInspectionPDF}" reRender="messages" style="height: 40px"/>
+                                <apex:commandButton value="連絡" action="{!confirmationPhoneReportInspection}" reRender="messages" style="height: 40px"/>
+                                <apex:commandButton value="承認" action="{!confirmationApprovalInspection}" reRender="messages" style="height: 40px"/>
+                            </td>
+                            <td style="width: 40%; text-align: center;">
+                                <h1>点検表</h1>
+                            </td>
+                            <td style="width: 30%; text-align: right;">
+                                <apex:commandButton value="< 前" rendered="{!renderMoveButton}" action="{!getPreviousInspection}" style="height: 40px"/>
+                                <apex:outputText value="{!pageInformation}"/>
+                                <apex:commandButton value="次 >" rendered="{!renderMoveButton}" action="{!getNextInspection}" style="height: 40px"/>
+                                <apex:commandButton value="終了" rendered="{!renderCancelButton}" action="{!cancel}" style="height: 40px"/>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table style="width: 100%;">
+                    <tbody>
+                        <tr>
+                            <td style="text-align: left; height: 40px">
+                                &nbsp;
+                                <apex:outputPanel id="messages">
+                                    <apex:outputText value="{!Message}" style="color: #FF0000"/>
+                                    <apex:commandButton value="キャンセル" rendered="{!OR(renderApprovalButton,renderPDFButton,renderPhoneReportButton)}" action="{!confirmationCancel}" reRender="messages" style="height: 40px"/>
+                                    <apex:commandButton value="PDF作成" rendered="{!renderPDFButton}" action="{!createInspectionPDF}" reRender="messages" style="height: 40px"/>
+                                    <apex:selectList rendered="{!renderPhoneReportButton}" value="{!selectionUser}" size="1" style="height: 40px">
+                                        <apex:selectOptions value="{!selectUserList}"/>
+                                    </apex:selectList>
+                                    <apex:commandButton value="依頼実行" rendered="{!renderPhoneReportButton}" action="{!phoneReportInspection}" reRender="messages" style="height: 40px"/>
+                                    <apex:commandButton value="承認申請" rendered="{!renderApprovalButton}" action="{!approvalInspection}" reRender="messages" style="height: 40px"/>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                &nbsp;
+                <apex:outputPanel >
+                    <apex:actionSupport event="onchange" action="{!saveInspection}" reRender="messages"/>
+                    <table style="width: 100%;" border="1">
+                        <tbody>
+                            <tr>
+                                <td style="width: 12%; height: 25px">{!$ObjectType.Inspection__c.Fields.AccountName__c.Label}</td>
+                                <td style="width: 38%; height: 25px">{!ip.AccountName__c}</td>
+                                <td style="width: 12%; height: 25px">{!$ObjectType.Inspection__c.Fields.InspectionDateTime__c.Label}</td>
+                                <td style="width: 38%; height: 25px">{!InspectionDateTime}</td>
+                            </tr>
+                            <tr>
+                                <td style="height: 25px">{!$ObjectType.Inspection__c.Fields.ModelName__c.Label}</td>
+                                <td style="height: 25px">{!ip.Manufacturer__c} {!ip.ModelName__c}</td>
+                                <td style="height: 25px">{!$ObjectType.Inspection__c.Fields.Name.Label}</td>
+                                <td style="height: 25px">{!ip.EquipmentNumber__c} {!ip.Name}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    &nbsp;
+                    <table style="width: 100%;" border="1">
+                        <tbody>
+                            <tr>
+                                <td style="width: 30%; height: 25px">点検内容</td>
+                                <td style="width: 20%; height: 25px">点検結果</td>
+                                <td style="width: 50%; height: 25px">特記事項</td>
+                            </tr>
+                            <apex:outputPanel rendered="{!renderA}">
+                                <tr>
+                                    <td style="width: 30%;">{!$ObjectType.Inspection__c.Fields.InspectionRresultA__c.Label}</td>
+                                    <td style="width: 20%;"><apex:inputField value="{!ip.InspectionRresultA__c}" style="width: 100%; height: 25px"/></td>
+                                    <td style="width: 50%;"><apex:inputField value="{!ip.InspectionNoticesA__c}" style="width: 99%; height: 25px"/></td>
+                                </tr>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!renderB}">
+                                <tr>
+                                    <td style="width: 30%;">{!$ObjectType.Inspection__c.Fields.InspectionRresultB__c.Label}</td>
+                                    <td style="width: 20%;"><apex:inputField value="{!ip.InspectionRresultB__c}" style="width: 100%; height: 25px"/></td>
+                                    <td style="width: 50%;"><apex:inputField value="{!ip.InspectionNoticesB__c}" style="width: 99%; height: 25px"/></td>
+                                </tr>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!renderC}">
+                                <tr>
+                                    <td style="width: 30%;">{!$ObjectType.Inspection__c.Fields.InspectionRresultC__c.Label}</td>
+                                    <td style="width: 20%;"><apex:inputField value="{!ip.InspectionRresultC__c}" style="width: 100%; height: 25px"/></td>
+                                    <td style="width: 50%;"><apex:inputField value="{!ip.InspectionNoticesC__c}" style="width: 99%; height: 25px"/></td>
+                                </tr>
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!renderD}">
+                                <tr>
+                                    <td style="width: 30%;">{!$ObjectType.Inspection__c.Fields.InspectionRresultD__c.Label}</td>
+                                    <td style="width: 20%;"><apex:inputField value="{!ip.InspectionRresultD__c}" style="width: 100%; height: 25px"/></td>
+                                    <td style="width: 50%;"><apex:inputField value="{!ip.InspectionNoticesD__c}" style="width: 99%; height: 25px"/></td>
+                                </tr>
+                            </apex:outputPanel>
+                        </tbody>
+                    </table>
+                    &nbsp;
+                    <table style="table-layout:fixed; width:100%" border="1">
+                        <tbody>
+                            <tr>
+                                <td style="height: 25px">{!$ObjectType.Inspection__c.Fields.Remarks__c.Label}</td>
+                            </tr>
+                            <tr>
+                                <td style="word-wrap :break-word" height="65px"><apex:inputField value="{!ip.Remarks__c}" style="width: 99%;"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </apex:outputPanel>
+            </apex:form>
+            
+        </body>
+    </html>
+    
+</apex:page>

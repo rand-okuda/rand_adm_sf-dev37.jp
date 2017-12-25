@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>点検施設</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>点検施設</value>
+    </caseValues>
+    <fields>
+        <label><!-- 取引先 --></label>
+        <name>Account__c</name>
+        <relationshipLabel><!-- 点検施設 --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- 外観イメージ --></label>
+        <name>ExteriorImage__c</name>
+    </fields>
+    <fields>
+        <label><!-- 点検期限超過 --></label>
+        <name>InspectionDueDateExcess__c</name>
+    </fields>
+    <fields>
+        <label><!-- 最終点検日時 --></label>
+        <name>LastInspectionDateTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- 施設種別 --></label>
+        <name>Model__c</name>
+        <relationshipLabel><!-- 点検施設 --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- 次回点検期限 --></label>
+        <name>NextInspectionDueDate__c</name>
+    </fields>
+    <fields>
+        <label><!-- 施設QRコード --></label>
+        <name>QRCode__c</name>
+    </fields>
+    <layouts>
+        <layout>機器 Layout</layout>
+        <sections>
+            <label><!-- カスタムリンク --></label>
+            <section>カスタムリンク</section>
+        </sections>
+        <sections>
+            <label><!-- 追加情報 --></label>
+            <section>追加情報</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>
