@@ -194,7 +194,16 @@ public class InspectionLogic {
         ev.AutoCreateByTrigger__c = true;
         return ev;
     }
-    
+
+    public static void DeleteEvent(list<Inspection__c> inspectionList){
+        System.debug('@@@ DeleteEvent()');
+        Set<Id> ipIdSet = new Set<Id>();
+        for(Inspection__c ip :inspectionList){
+            ipIdSet.add(ip.Id);
+        }
+        delete [SELECT Id, StartDateTime, OwnerId, WhatId FROM Event WHERE WhatId = :ipIdSet AND AutoCreateByTrigger__c = true];
+    }
+
     public static void RecordTypeChanger(list<Inspection__c> inspectionList){
         System.debug('@@@ RecordTypeChanger()');
         Map<String, String> recordTypeMap = new Map<String, String>();

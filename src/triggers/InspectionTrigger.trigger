@@ -72,6 +72,7 @@ trigger InspectionTrigger on Inspection__c (before insert, after insert, after u
         }
         if(CompletedInspectionList.size() > 0){
             InspectionLogic.CreateNextInspection(CompletedInspectionList);
+            InspectionLogic.DeleteEvent(CompletedInspectionList);
         }
     }
 
