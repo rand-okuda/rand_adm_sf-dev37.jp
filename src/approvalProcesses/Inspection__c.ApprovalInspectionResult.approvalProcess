@@ -21,10 +21,10 @@
         <field>InspectionNoticesD__c</field>
     </approvalPageFields>
     <approvalStep>
-        <allowDelegate>false</allowDelegate>
+        <allowDelegate>true</allowDelegate>
         <assignedApprover>
             <approver>
-                <name>rand_adm_sf@dev37.jp</name>
+                <name>rand_demo02_sf@dev37.jp</name>
                 <type>user</type>
             </approver>
             <whenMultipleApprovers>FirstResponse</whenMultipleApprovers>
