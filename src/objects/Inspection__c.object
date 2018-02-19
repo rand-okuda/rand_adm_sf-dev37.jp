@@ -53,6 +53,7 @@
         <fields>Manufacturer__c</fields>
         <fields>ModelName__c</fields>
         <fields>AccountName__c</fields>
+        <fields>InspectionCompleted__c</fields>
         <label>点検予実</label>
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
@@ -597,6 +598,7 @@ AND(
     <recordTypes>
         <fullName>Air</fullName>
         <active>true</active>
+        <compactLayoutAssignment>Inspection</compactLayoutAssignment>
         <label>エアー</label>
         <picklistValues>
             <picklist>SelectInspectionResult</picklist>
@@ -617,6 +619,7 @@ AND(
     <recordTypes>
         <fullName>Cogener</fullName>
         <active>true</active>
+        <compactLayoutAssignment>Inspection</compactLayoutAssignment>
         <label>コージェネ</label>
         <picklistValues>
             <picklist>SelectInspectionResult</picklist>
@@ -637,6 +640,7 @@ AND(
     <recordTypes>
         <fullName>Master</fullName>
         <active>true</active>
+        <compactLayoutAssignment>Inspection</compactLayoutAssignment>
         <label>マスター</label>
         <picklistValues>
             <picklist>SelectInspectionResult</picklist>
@@ -657,6 +661,7 @@ AND(
     <recordTypes>
         <fullName>Solar</fullName>
         <active>true</active>
+        <compactLayoutAssignment>Inspection</compactLayoutAssignment>
         <label>太陽光</label>
         <picklistValues>
             <picklist>SelectInspectionResult</picklist>
@@ -677,6 +682,7 @@ AND(
     <recordTypes>
         <fullName>Storage</fullName>
         <active>true</active>
+        <compactLayoutAssignment>Inspection</compactLayoutAssignment>
         <label>蓄電</label>
         <picklistValues>
             <picklist>SelectInspectionResult</picklist>
