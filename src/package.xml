@@ -81,6 +81,8 @@
         <members>CampaignMember</members>
         <members>Case</members>
         <members>CaseContactRole</members>
+        <members>CollaborationGroup</members>
+        <members>CollaborationGroupMember</members>
         <members>Contact</members>
         <members>ContactCleanInfo</members>
         <members>ContentVersion</members>
@@ -106,17 +108,22 @@
         <members>OpportunityLineItem</members>
         <members>Order</members>
         <members>OrderItem</members>
+        <members>OrgDeleteRequest</members>
         <members>PartnerRole</members>
         <members>Pricebook2</members>
         <members>PricebookEntry</members>
         <members>Product2</members>
+        <members>QuickText</members>
         <members>Scorecard</members>
+        <members>ScorecardAssociation</members>
         <members>ScorecardMetric</members>
         <members>Site</members>
         <members>SocialPersona</members>
         <members>Solution</members>
         <members>StreamingChannel</members>
         <members>Task</members>
+        <members>Topic</members>
+        <members>TopicAssignment</members>
         <members>User</members>
         <members>UserProvisioningRequest</members>
         <members>*</members>
@@ -152,9 +159,9 @@
         <name>DataCategoryGroup</name>
     </types>
     <types>
+        <members>Salesforce1</members>
         <members>Logo</members>
         <members>Logo/RAND.jpg</members>
-        <members>Salesforce1</members>
         <name>Document</name>
     </types>
     <types>
