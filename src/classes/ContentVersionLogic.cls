@@ -3,35 +3,35 @@ public class ContentVersionLogic {
     public static void QRcodeImageSearch(List<ContentVersion> contentVersionList){
         System.debug('@@@ QRcodeImageSearch()');
         System.debug('***contentVersionList ' + contentVersionList);
-        List<ContentDistribution> cDiList = new List<ContentDistribution>();
+        List<ContentDistribution> cDistList = new List<ContentDistribution>();
         Set<Id> contentVersionIdSet = new Set<Id>();
         for(ContentVersion cv :contentVersionList){
-            ContentDistribution cDi = new ContentDistribution();
-            cDi.Name = 'Auto Create By Trigger';
-            cDi.ContentVersionId = cv.Id;
-            cDi.PreferencesNotifyOnVisit = false;
-            cDiList.add(cDi);
+            ContentDistribution cDist = new ContentDistribution();
+            cDist.Name = 'Auto Create By Trigger';
+            cDist.ContentVersionId = cv.Id;
+            cDist.PreferencesNotifyOnVisit = false;
+            cDistList.add(cDist);
             contentVersionIdSet.add(cv.Id);
         }
-        List<ContentDistribution> existCDiList = [SELECT Id, ContentVersionId FROM ContentDistribution WHERE ContentVersionId = :contentVersionIdSet];
-        delete existCDiList;
-        insert cDiList;
-        System.debug('***cDiList ' + cDiList);
-        for(ContentDistribution cDi :[SELECT ContentVersionId, ContentDownloadUrl, ContentDocumentId, ContentVersion.OwnerId FROM ContentDistribution WHERE ContentVersionId = :contentVersionIdSet]){
-            System.debug('***ContentDownloadUrl ' + cDi.ContentDownloadUrl);
-            QueueableZXingCall queueableZXingCall = new QueueableZXingCall(cDi);
+        List<ContentDistribution> existCDistList = [SELECT Id, ContentVersionId FROM ContentDistribution WHERE ContentVersionId = :contentVersionIdSet];
+        delete existCDistList;
+        insert cDistList;
+        System.debug('***cDistList ' + cDistList);
+        for(ContentDistribution cDist :[SELECT ContentVersionId, ContentDownloadUrl, ContentDocumentId, ContentVersion.OwnerId FROM ContentDistribution WHERE ContentVersionId = :contentVersionIdSet]){
+            System.debug('***ContentDownloadUrl ' + cDist.ContentDownloadUrl);
+            QueueableZXingCall queueableZXingCall = new QueueableZXingCall(cDist);
             System.enqueueJob(queueableZXingCall);
         }
     }
 
     public class QueueableZXingCall implements System.Queueable, Database.AllowsCallouts {
-        private ContentDistribution cDi;
-        public QueueableZXingCall(ContentDistribution cDi){
+        private ContentDistribution cDist;
+        public QueueableZXingCall(ContentDistribution cDist){
             System.debug('@@@ QueueableZXingCall()');
-            this.cDi = cDi;
+            this.cDist = cDist;
         }
         public void execute(QueueableContext context) {
-            String encodedUrl = EncodingUtil.urlEncode(cDi.ContentDownloadUrl, 'UTF-8');
+            String encodedUrl = EncodingUtil.urlEncode(cDist.ContentDownloadUrl, 'UTF-8');
             String endpoint = 'https://zxing.org/w/decode?u=' + encodedUrl;
             System.debug('***endpoint ' + endpoint);
             Http http = new Http();
@@ -65,14 +65,14 @@ public class ContentVersionLogic {
             }
             System.debug('***decodeQR ' + decodeQR);
             FeedItem responseFi = new FeedItem();
-            responseFi.ParentId = cDi.ContentVersion.OwnerId;
-            responseFi.RelatedRecordId = cDi.ContentVersionId;
+            responseFi.ParentId = cDist.ContentVersion.OwnerId;
+            responseFi.RelatedRecordId = cDist.ContentVersionId;
             if(response.getStatusCode() == 200 && resBody.contains('Decode Succeeded' )){
                 Integer ipCount = [SELECT COUNT() FROM Inspection__c WHERE Id = :decodeQR];
                 if(ipCount > 0){
                     Inspection__c ip = [SELECT Id FROM Inspection__c WHERE Id = :decodeQR];
                     ContentDocumentLink cdl = new ContentDocumentLink();
-                    cdl.ContentDocumentId = cDi.ContentDocumentId;
+                    cdl.ContentDocumentId = cDist.ContentDocumentId;
                     cdl.ShareType = 'V';
                     cdl.Visibility = 'AllUsers';
                     cdl.LinkedEntityId = ip.Id;
